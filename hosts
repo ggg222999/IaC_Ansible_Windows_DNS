@@ -1,0 +1,14 @@
+[winad]
+10.1.1.10 ansible_port=5986 ansible_connection=winrm ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore  ansible_user=administrator
+
+
+[all:vars]
+ansible_user=root
+ansible_password=xxxxxxx
+
+spacewalk_user=admin
+spacewalk_password=xxxxxxxx
+
+dns_server=10.1.1.10
+domain=test.com
+ptrdomain=1.168.192.in-addr.arpa

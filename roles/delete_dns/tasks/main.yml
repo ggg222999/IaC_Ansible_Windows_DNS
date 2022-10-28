@@ -1,0 +1,9 @@
+---
+#  - name: Remove DNS entries
+#    win_shell: "Remove-DnsServerResourceRecord -name {{ item.hostname }}  -ZoneName {{ domain }} -RRType A -force"
+#    with_items: "{{ vms }}"
+
+  - name: Remove DNS PTR entries
+    win_shell: "Remove-DnsServerResourceRecord -name {{ item.ptrname }}  -ZoneName {{ ptrdomain }} -RRType Ptr -force"
+    with_items: "{{ vms }}"
+

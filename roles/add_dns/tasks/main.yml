@@ -1,0 +1,9 @@
+---
+  - name: Add DNS A Record to Windows DNS 
+    win_shell: "Add-DnsServerResourceRecord -A -Name {{ item.hostname }} -ZoneName {{ domain }} -AllowUpdateAny -IPv4Address {{ item.network.ip }} -TimeToLive 01:00:00"
+    with_items: "{{ vms }}"
+
+  - name: Add DNS PTR Record to Windows DNS
+    win_shell: "Add-DnsServerResourceRecord -Ptr -Name {{ item.ptrname }} -ZoneName {{ ptrdomain }} -AllowUpdateAny -PtrDomainName {{ item.hostname }}.{{ domain }}"
+    with_items: "{{ vms }}"
+

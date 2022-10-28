@@ -1,0 +1,153 @@
+vms:
+  - type: ELK
+    name: "elkmaster01"
+    hostname: "elkmaster01"
+    ansible_port: 22
+    ptrname: 236
+    
+    cpu: 2   
+    memory: 4096MB
+
+    network_switch: 'vSW-192.168.1.x' 
+    network:
+      ip: 192.168.1.236
+      netmask: 255.255.255.0
+      gateway: 192.168.1.1
+      dns: 192.168.1.10
+      search: gor.net
+
+#    src_vhd: "F:\\Hyper-V\\image\\Ubuntu20-NotNetPlan.vhdx"
+    src_vhd: "F:\\Hyper-V\\image\\Centos7-BaseOS.vhdx"
+    dest_vhd: "H:\\Hyper-V\\k8s\\elkmaster01.vhdx"
+
+  - type: ELK
+    name: "elkmaster02"
+    hostname: "elkmaster02"
+    ansible_port: 22
+    ptrname: 237
+
+    cpu: 2
+    memory: 4096MB
+
+    network_switch: 'vSW-192.168.1.x'
+    network:
+      ip: 192.168.1.237
+      netmask: 255.255.255.0
+      gateway: 192.168.1.1
+      dns: 192.168.1.10
+      search: gor.net
+
+#    src_vhd: "F:\\Hyper-V\\image\\Ubuntu20-NotNetPlan.vhdx"
+    src_vhd: "F:\\Hyper-V\\image\\Centos7-BaseOS.vhdx"
+    dest_vhd: "I:\\Hyper-V\\k8s\\elkmaster02.vhdx"
+
+  - type: k8s
+    name: "elkmaster03"
+    hostname: "elkmaster03"
+    ansible_port: 22
+    ptrname: 238
+
+    cpu: 2
+    memory: 4096MB
+
+    network_switch: 'vSW-192.168.1.x'
+    network:
+      ip: 192.168.1.238
+      netmask: 255.255.255.0
+      gateway: 192.168.1.1
+      dns: 192.168.1.10
+      search: gor.net
+
+#    src_vhd: "F:\\Hyper-V\\image\\Ubuntu20-NotNetPlan.vhdx"
+    src_vhd: "F:\\Hyper-V\\image\\Centos7-BaseOS.vhdx"
+    dest_vhd: "N:\\Hyper-V\\k8s\\elkmaster03.vhdx"
+
+
+#  - type: k8s
+#    name: "k8sworker01"
+#    hostname: "k8sworker01"
+#    ansible_port: 22
+#    
+#    cpu: 2
+#    memory: 4096MB
+#
+#    network:
+#      ip: 192.168.1.231
+#      netmask: 255.255.255.0
+#      gateway: 192.168.1.1
+#      dns: 192.168.1.10
+#      search: gor.net
+#
+#    network_switch: 'vSW-192.168.1.x'
+#
+##    src_vhd: "F:\\Hyper-V\\image\\Ubuntu20-NotNetPlan.vhdx"
+#    src_vhd: "F:\\Hyper-V\\image\\Centos7-BaseOS.vhdx"
+#    dest_vhd: "H:\\Hyper-V\\k8s\\k8sworker01.vhdx"
+#
+#  - type: k8s
+#    name: "k8sworker02"
+#    hostname: "k8sworker02"
+#    ansible_port: 22
+#    
+#    cpu: 2
+#    memory: 4096MB
+#
+#    network:
+#      ip: 192.168.1.232
+#      netmask: 255.255.255.0
+#      gateway: 192.168.1.1
+#      dns: 192.168.1.10
+#      search: gor.net
+#
+#    network_switch: 'vSW-192.168.1.x'
+#
+##    src_vhd: "F:\\Hyper-V\\image\\Ubuntu20-NotNetPlan.vhdx"
+#    src_vhd: "F:\\Hyper-V\\image\\Centos7-BaseOS.vhdx"
+#    dest_vhd: "I:\\Hyper-V\\k8s\\k8sworker02.vhdx"
+#
+#  - type: k8s
+#    name: "k8sworker03"
+#    hostname: "k8sworker03"
+#    ansible_port: 22
+#
+#    cpu: 2
+#    memory: 4096MB
+#
+#    network:
+#      ip: 192.168.1.235
+#      netmask: 255.255.255.0
+#      gateway: 192.168.1.1
+#      dns: 192.168.1.10
+#      search: gor.net
+#
+#    network_switch: 'vSW-192.168.1.x'
+#
+##    src_vhd: "F:\\Hyper-V\\image\\Ubuntu20-NotNetPlan.vhdx"
+#    src_vhd: "F:\\Hyper-V\\image\\Centos7-BaseOS.vhdx"
+#    dest_vhd: "N:\\Hyper-V\\k8s\\k8sworker03.vhdx"
+
+
+# Spacewalk vars
+spacewalk:
+  - type: web
+    name: web2
+    spacewalk_group: production
+    
+  - type: app
+    name: app2
+    spacewalk_group: centos-7-group
+
+
+# user information
+user:
+  name: user1
+  uid: 10001
+  password: $6$F4NWXRFtSdCi8$DsB5vvMJYusQhSbvGXrYDXL6Xj37MUuqFCd4dGXdKd6NyxT3lpdELN07/Kpo7EjjWnm9zusFg/LLFv6oc.ynu/
+  group: root
+  groups: tomcat
+  state: present
+  shell: /bin/bash       # Defaults to /bin/bash
+  system: no             # Defaults to no
+  createhome: yes        # Defaults to yes
+  home: /home/"{{ item.name }}"  # Defaults to /home/<username>
+

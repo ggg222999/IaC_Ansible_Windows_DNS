@@ -1,0 +1,4 @@
+---
+- hosts: winad
+  roles:
+    - delete_dns
